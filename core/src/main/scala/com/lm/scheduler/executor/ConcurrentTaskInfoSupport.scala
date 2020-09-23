@@ -4,7 +4,7 @@ package com.lm.scheduler.executor
  * @Classname ConcurrentTaskInfoSupport
  * @Description TODO
  * @Date 2020/9/23 20:12
- * @Created by limeng
+ * @Created by limeng asd
  */
 trait ConcurrentTaskInfoSupport {
   def progress(jobId: String): Float
