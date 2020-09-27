@@ -1,5 +1,7 @@
 package com.lm.scheduler.executor
 
+import com.lm.protocol.engine.JobProgressInfo
+
 /**
  * @Classname ConcurrentTaskInfoSupport
  * @Description TODO
@@ -13,4 +15,3 @@ trait ConcurrentTaskInfoSupport {
   def log(jobId: String): String
 
 }
-case class JobProgressInfo(id: String, totalTasks: Int, runningTasks: Int, failedTasks: Int, succeedTasks: Int)

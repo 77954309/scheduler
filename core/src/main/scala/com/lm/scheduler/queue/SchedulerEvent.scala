@@ -45,6 +45,8 @@ trait SchedulerEvent extends Logging{
 
   def getState = state
 
+  def cancel() = transition(Cancelled)
+
   def afterStateChanged(fromState: SchedulerEventState, toState: SchedulerEventState): Unit
 
   protected def transition(state: SchedulerEventState): Unit = synchronized {

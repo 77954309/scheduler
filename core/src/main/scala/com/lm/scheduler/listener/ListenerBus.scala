@@ -117,7 +117,6 @@ private[lm] trait ListenerBus[L<:EventListener,E<:Event] extends Logging{
      }else{
 
      }
-
    }
 
 
@@ -207,9 +206,7 @@ private[lm] trait ListenerBus[L<:EventListener,E<:Event] extends Logging{
         })
       }
       threadRelease()
-
     }
-
 
     def isRunning: Boolean = event.isDefined
 
@@ -228,7 +225,6 @@ private[lm] trait ListenerBus[L<:EventListener,E<:Event] extends Logging{
       continue = false
       future.foreach(_.cancel(true))
     }
-
 
   }
 
