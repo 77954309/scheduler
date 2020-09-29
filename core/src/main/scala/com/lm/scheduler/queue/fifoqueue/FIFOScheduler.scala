@@ -14,5 +14,12 @@ class FIFOScheduler(val schedulerContext: SchedulerContext) extends AbstractSche
 
   private var groupFactory:GroupFactory = _
 
+  override def init()={
+    consumerManager =schedulerContext.getOrCreateConsumerManager
+    groupFactory = schedulerContext.getOrCreateGroupFactory
+  }
 
+  override def getName: String = "FIFOScheduler"
+
+  override def getSchedulerContext: SchedulerContext = schedulerContext
 }

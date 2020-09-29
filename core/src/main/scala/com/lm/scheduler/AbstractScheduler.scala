@@ -2,6 +2,7 @@ package com.lm.scheduler
 
 import com.lm.scheduler.exception.SchedulerErrorException
 import com.lm.scheduler.queue.SchedulerEvent
+import com.lm.scheduler.utils.Utils
 import org.apache.commons.lang.StringUtils
 
 /**
@@ -34,6 +35,21 @@ abstract class AbstractScheduler extends Scheduler {
 
   override def get(event: SchedulerEvent): Option[SchedulerEvent] = get(event.getId)
 
+  override def get(eventId: String): Option[SchedulerEvent] = {
+    val (index,groupName) = getIndexAndGroupName(eventId)
+    val consumer = getSchedulerContext.getOrCreateConsumerManager.getOrCreateConsumer(groupName)
+    consumer.getRunningEvents.find(_.getId == eventId).orElse(consumer.getConsumeQueue.get(index))
+  }
+
+  override def shutdown(): Unit =if(getSchedulerContext != null) {
+    if(getSchedulerContext.getOrCreateConsumerManager != null)
+      Utils.tryQuietly(getSchedulerContext.getOrCreateConsumerManager.shutdown())
+    if(getSchedulerContext.getOrCreateExecutorManager != null)
+      Utils.tryQuietly(getSchedulerContext.getOrCreateExecutorManager)
+    if(getSchedulerContext.getOrCreateSchedulerListenerBus != null)
+      Utils.tryQuietly(getSchedulerContext.getOrCreateSchedulerListenerBus.stop())
+
+  }
 
 
 }

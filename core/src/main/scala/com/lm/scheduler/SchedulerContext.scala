@@ -3,6 +3,7 @@ package com.lm.scheduler
 import com.lm.scheduler.event.{ScheduleEvent, SchedulerEventListener}
 import com.lm.scheduler.executor.ExecutorManager
 import com.lm.scheduler.listener.ListenerEventBus
+import com.lm.scheduler.queue.fifoqueue.FIFOSchedulerContextImpl
 import com.lm.scheduler.queue.{Consumer, ConsumerManager, GroupFactory}
 
 /**
@@ -22,7 +23,8 @@ trait SchedulerContext {
 
   def getOrCreateSchedulerListenerBus:ListenerEventBus[_ <: SchedulerEventListener, _<: ScheduleEvent]
 
-
-
-
+}
+object SchedulerContext {
+  val schedulerContext:SchedulerContext = new FIFOSchedulerContextImpl( 100)
+  def getSchedulerContext:SchedulerContext = schedulerContext
 }
