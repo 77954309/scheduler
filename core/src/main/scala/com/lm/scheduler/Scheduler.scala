@@ -2,6 +2,7 @@ package com.lm.scheduler
 
 import com.lm.scheduler.queue.SchedulerEvent
 import com.lm.scheduler.queue.fifoqueue.FIFOScheduler
+import com.lm.scheduler.queue.parallelqueue.ParallelScheduler
 import com.lm.scheduler.utils.Logging
 
 /**
